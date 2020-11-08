@@ -1,26 +1,29 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
 import 'antd/dist/antd.css'
-import {Button} from "antd";
+import {adminRoutes} from "./routes";
+import {Redirect, Route, Switch} from "react-router-dom";
+
 
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <Button type="primary">Button</Button>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <Switch>
+                {
+                    adminRoutes.map(route => {
+                        return (
+                            <Route key={route.path}
+                                   path={route.path}
+                                   exact={route.exact}
+                                   render={routeProps => {
+                                       return <route.component {...routeProps} />
+                                   }
+                                   }
+                            />)
+                    })}
+                <Redirect from='/admin' to={adminRoutes[0].path}/>
+                <Redirect to='/404'/>
+            </Switch>
         </div>
     );
 }
