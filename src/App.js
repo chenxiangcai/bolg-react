@@ -1,5 +1,5 @@
 import React from "react";
-import './App.css';
+import './assets/style/reset.css';
 import 'antd/dist/antd.css'
 import {adminRoutes} from "./routes";
 import {Redirect, Route, Switch} from "react-router-dom";
